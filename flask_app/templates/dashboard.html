@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>User Dashboard</title>
+</head>
+<body>
+    <h1>User Dashboard</h1>
+    <h2>All Users In The Database</h2>
+    <table>
+        <thead>
+            <th>Name</th>
+            <th>Email</th>
+            <th>age</th>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{user.first_name}} {{user.last_name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.age}}</td>
+                <td>
+                    <a href="/users/{{user.id}}">Show</a>
+                    <a href="/users/{{user.id}}/edit">Edit</a>
+                    <a href="/users/{{user.id}}/delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h2>Create a user</h2>
+    <form action="/users/create" method="POST">
+        <p>First Name: <input name="first_name" type="text"></p>
+        <p>Last Name: <input name="last_name" type="text"></p>
+        <p>Email: <input name="email" type="text"></p>
+        <p>Age: <input name="age" type="number"></p>
+        <button type="submit">Create User</button>
+    </form>
+</body>
+</html>
